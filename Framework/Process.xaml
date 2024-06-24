@@ -1,0 +1,613 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Process" this:Process.in_CheminCalendrier="C:\Process\BKSOL_SDM_Report_PL_TauxMAD\Calendrier.xlsx" this:Process.in_Chemin_FichierMO="C:\Process\BKSOL_SDM_Report_PL_TauxMAD\MO" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_CheminCalendrier" Type="InArgument(x:String)" />
+    <x:Property Name="in_Chemin_FichierMO" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>858,2129</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="50">
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Windows.Forms</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>UiPath.Core.Activities.Orchestrator</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="80">
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="541,2064" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="Derniere_Date" />
+      <Variable x:TypeArguments="sd:DataTable" Name="DT_Calendrier" />
+      <Variable x:TypeArguments="x:String" Name="NextDate" />
+      <Variable x:TypeArguments="x:String" Name="NouvelleDate_Month_FR_Majuscule" />
+      <Variable x:TypeArguments="x:String" Name="NouvelleDate_JJ_MM_YYYY_AvecEspace" />
+      <Variable x:TypeArguments="x:String" Name="NouvelleDate_JJ_MM_YY_AvecEspace" />
+      <Variable x:TypeArguments="x:String" Name="NouvelleDate_Annee_YYYY" />
+      <Variable x:TypeArguments="x:String" Name="NouvelleDate_JJ_MM_YYYY" />
+      <Variable x:TypeArguments="x:String" Name="DerniereDate_JJ_MM_YYYY" />
+      <Variable x:TypeArguments="x:String" Name="Lien_DernierFichier_HistoBilan" />
+      <Variable x:TypeArguments="x:String" Name="DerniereDate_Annee_YYYY" />
+      <Variable x:TypeArguments="x:String" Name="DerniereDate_Month_Fr_CapitalLetter" />
+      <Variable x:TypeArguments="x:String" Name="Mois_DerniereDate" />
+      <Variable x:TypeArguments="x:String" Name="NouvelleDate_JJMMYY" />
+      <Variable x:TypeArguments="x:String" Name="NouvelleDate_Month_FR_CapitalLetter" />
+      <Variable x:TypeArguments="x:String" Name="DerniereDate_Month_FR_Majuscule" />
+      <Variable x:TypeArguments="x:String" Name="NouvelleDate_JJ" />
+      <Variable x:TypeArguments="x:String" Name="DerniereDate_JJ_MM_YYYY_AvecEspace" />
+      <Variable x:TypeArguments="x:String" Name="DerniereDate_JJ_MM_YY_AvecEspace" />
+      <Variable x:TypeArguments="x:String" Name="Statut" />
+      <Variable x:TypeArguments="x:String" Name="NomFichier_MO_DerniereDate" />
+      <Variable x:TypeArguments="x:String" Name="NomFichier_MO_NouvelleDate" />
+      <Variable x:TypeArguments="x:String" Name="AvantDerniereDate_Formule_DonneesOption" />
+      <Variable x:TypeArguments="x:String" Name="AvantDerniereDate" />
+      <Variable x:TypeArguments="x:String" Name="AvantDerniereDate_Mois_Fr_CapitalLetter" />
+      <Variable x:TypeArguments="x:String" Name="AvantDerniereDate_Annee_YYYY" />
+      <Variable x:TypeArguments="x:String" Name="Chemin_AvantDerniereDate_DonneesOption" />
+      <Variable x:TypeArguments="x:String" Name="Chemin_DerniereDate_DonneesOption" />
+      <Variable x:TypeArguments="x:String" Name="AvantDerniereDate_Mois_Fr_Majscule" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="479,181" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]" />
+    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="BKSOL_SDM_Report_PL_TauxMAD_DerniereDate" CacheStrategy="None" DisplayName="Get Asset" sap:VirtualizedContainerService.HintSize="479,183" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
+      <ui:GetRobotAsset.Value>
+        <OutArgument x:TypeArguments="x:String">[Derniere_Date]</OutArgument>
+      </ui:GetRobotAsset.Value>
+    </ui:GetRobotAsset>
+    <ui:ReadRange AddHeaders="True" DataTable="[DT_Calendrier]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="479,128" sap2010:WorkflowViewState.IdRef="ReadRange_1" Range="A1" SheetName="Calendrier" WorkbookPath="[in_CheminCalendrier]" />
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,869" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="32">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NextDate]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DT_Calendrier.AsEnumerable.FirstOrDefault(function(r) Datetime.ParseExact(r(0).toString.replace(" 00:00:00",""),"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture) &gt; Datetime.ParseExact(Derniere_Date,"dd/MM/yyyy",System.Globalization.CultureInfo.InvariantCulture) and r(1).ToString.trim.Equals("Ouvrable"))(0).ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NouvelleDate_Month_FR_Majuscule]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(NextDate.replace(" 00:00:00","").trim,"MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture).tostring("MMMM",new system.Globalization.CultureInfo("fr-FR")).Replace("é","e").ToUpper]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NouvelleDate_JJ_MM_YYYY_AvecEspace]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(NextDate.replace(" 00:00:00","").trim,"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("dd MM yyyy")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NouvelleDate_Annee_YYYY]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(NextDate.replace(" 00:00:00","").trim,"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("yyyy")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NouvelleDate_JJ_MM_YYYY]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(NextDate.replace(" 00:00:00","").trim,"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("dd/MM/yyyy")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NouvelleDate_JJ_MM_YY_AvecEspace]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(NextDate.replace(" 00:00:00","").trim,"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("dd MM yy")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NouvelleDate_JJMMYY]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(NextDate.replace(" 00:00:00","").trim,"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("ddMMyy")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[DerniereDate_JJ_MM_YYYY]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[Derniere_Date]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[DerniereDate_Annee_YYYY]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[Derniere_Date.Split("/"c)(2)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[Mois_DerniereDate]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(Derniere_Date.trim,"dd/MM/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("MMMM",new system.Globalization.CultureInfo("fr-FR")).Replace("é","e")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[DerniereDate_Month_Fr_CapitalLetter]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[Mois_DerniereDate.Substring(0,1).ToUpper + Mois_DerniereDate.Substring(1).ToLower]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[Lien_DernierFichier_HistoBilan]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[in_Chemin_FichierMO.TrimEnd("\"c)+"\MO "+DerniereDate_Annee_YYYY +"\"+DerniereDate_Month_Fr_CapitalLetter + " " + DerniereDate_Annee_YYYY +"\[MO journée_"+Derniere_Date.trim.Split("/"c)(0)+ "_" + Mois_DerniereDate.ToUpper +"_"+DerniereDate_Annee_YYYY +".xlsm]"]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[DerniereDate_Month_FR_Majuscule]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DerniereDate_Month_Fr_CapitalLetter.ToUpper]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_15">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NouvelleDate_Month_FR_CapitalLetter]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String" xml:space="preserve">[NouvelleDate_Month_FR_Majuscule.Substring(0,1).ToUpper  + NouvelleDate_Month_FR_Majuscule.Substring(1).ToLower]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_16">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[DerniereDate_JJ_MM_YYYY_AvecEspace]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(Derniere_Date.replace(" 00:00:00","").trim,"dd/MM/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("dd MM yyyy")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_17">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[DerniereDate_JJ_MM_YY_AvecEspace]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(Derniere_Date.replace(" 00:00:00","").trim,"dd/MM/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("dd MM yy")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_19">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NomFichier_MO_DerniereDate]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">["MO journée_"+Derniere_Date.Split("/"c)(0)+"_" + DerniereDate_Month_Fr_CapitalLetter.ToLower+"_"+Derniere_Date.Split("/"c)(2)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_20">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NomFichier_MO_NouvelleDate]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">["MO journée_"+NouvelleDate_JJ_MM_YYYY.Split("/"c)(0) +"_"+ NouvelleDate_Month_FR_Majuscule.ToLower+"_"+NouvelleDate_JJ_MM_YYYY.Split("/"c)(2)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_21">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[AvantDerniereDate]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DT_Calendrier.AsEnumerable.LastOrDefault(function(r) Datetime.ParseExact(r(0).toString.replace(" 00:00:00",""),"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture) &lt; Datetime.ParseExact(Derniere_Date,"dd/MM/yyyy",System.Globalization.CultureInfo.InvariantCulture) and r(1).ToString.trim.Equals("Ouvrable"))(0).ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_23">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[AvantDerniereDate_Mois_Fr_Majscule]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(AvantDerniereDate.replace(" 00:00:00","").trim,"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("MMMM",new system.Globalization.CultureInfo("fr-FR")).Replace("é","e").ToUpper]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_26">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[AvantDerniereDate_Mois_Fr_CapitalLetter]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[AvantDerniereDate_Mois_Fr_Majscule.ToUpper.Substring(0,1) + AvantDerniereDate_Mois_Fr_Majscule.ToLower.Substring(1)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_24">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[AvantDerniereDate_Annee_YYYY]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(NextDate.replace(" 00:00:00","").trim,"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("yyyy")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_22">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[Chemin_AvantDerniereDate_DonneesOption]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[in_Chemin_FichierMO.TrimEnd("\"c) +"\" +"MO " + AvantDerniereDate_Annee_YYYY +"\" + AvantDerniereDate_Mois_Fr_CapitalLetter + " " + AvantDerniereDate_Annee_YYYY + "\" + "[MO journée_"+DateTime.ParseExact(AvantDerniereDate.replace(" 00:00:00","").trim,"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("dd")+"_" + AvantDerniereDate_Mois_Fr_CapitalLetter.ToLower+"_"+AvantDerniereDate_Annee_YYYY + ".xlsm]DONNEES OPTIONS"]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_25">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[Chemin_DerniereDate_DonneesOption]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[in_Chemin_FichierMO.TrimEnd("\"c) +"\" +"MO " + DerniereDate_Annee_YYYY +"\" + DerniereDate_Month_Fr_CapitalLetter + " " + DerniereDate_Annee_YYYY+ "\" + "[MO journée_"+Derniere_Date.Split("/"c)(0)+"_" + DerniereDate_Month_FR_Majuscule.ToLower+"_"+DerniereDate_Annee_YYYY+ ".xlsm]DONNEES OPTIONS"]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:MultipleAssign>
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,65" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="32">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_27">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NextDate]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DT_Calendrier.AsEnumerable.FirstOrDefault(function(r) Datetime.ParseExact(r(0).toString.replace(" 00:00:00",""),"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture) &gt; Datetime.ParseExact(Derniere_Date,"dd/MM/yyyy",System.Globalization.CultureInfo.InvariantCulture) and r(1).ToString.trim.Equals("Ouvrable"))(0).ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_28">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NouvelleDate_Month_FR_Majuscule]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(NextDate.replace(" 00:00:00","").trim,"MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture).tostring("MMMM",new system.Globalization.CultureInfo("fr-FR")).Replace("é","e").ToUpper]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_29">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NouvelleDate_JJ_MM_YYYY_AvecEspace]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(NextDate.replace(" 00:00:00","").trim,"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("dd MM yyyy")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_30">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NouvelleDate_Annee_YYYY]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(NextDate.replace(" 00:00:00","").trim,"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("yyyy")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_31">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NouvelleDate_JJ_MM_YYYY]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(NextDate.replace(" 00:00:00","").trim,"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("dd/MM/yyyy")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_32">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NouvelleDate_JJ_MM_YY_AvecEspace]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(NextDate.replace(" 00:00:00","").trim,"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("dd MM yy")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_33">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NouvelleDate_JJMMYY]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(NextDate.replace(" 00:00:00","").trim,"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("ddMMyy")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_34">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[DerniereDate_JJ_MM_YYYY]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[Derniere_Date]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_35">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[DerniereDate_Annee_YYYY]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[Derniere_Date.Split("/"c)(2)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_36">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[Mois_DerniereDate]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(Derniere_Date.trim,"dd/MM/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("MMMM",new system.Globalization.CultureInfo("fr-FR")).Replace("é","e")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_37">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[DerniereDate_Month_Fr_CapitalLetter]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[Mois_DerniereDate.Substring(0,1).ToUpper + Mois_DerniereDate.Substring(1).ToLower]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_38">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[Lien_DernierFichier_HistoBilan]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[in_Chemin_FichierMO.TrimEnd("\"c)+"\MO "+DerniereDate_Annee_YYYY +"\"+DerniereDate_Month_Fr_CapitalLetter + " " + DerniereDate_Annee_YYYY +"\[MO journée_"+Derniere_Date.trim.Split("/"c)(0)+ "_" + Mois_DerniereDate.ToUpper +"_"+DerniereDate_Annee_YYYY +".xlsm]"]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_39">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[DerniereDate_Month_FR_Majuscule]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DerniereDate_Month_Fr_CapitalLetter.ToUpper]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_40">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NouvelleDate_Month_FR_CapitalLetter]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String" xml:space="preserve">[NouvelleDate_Month_FR_Majuscule.Substring(0,1).ToUpper  + NouvelleDate_Month_FR_Majuscule.Substring(1).ToLower]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_41">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[DerniereDate_JJ_MM_YYYY_AvecEspace]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(Derniere_Date.replace(" 00:00:00","").trim,"dd/MM/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("dd MM yyyy")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_42">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[DerniereDate_JJ_MM_YY_AvecEspace]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(Derniere_Date.replace(" 00:00:00","").trim,"dd/MM/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("dd MM yy")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_43">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NomFichier_MO_DerniereDate]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">["MO journée_"+Derniere_Date.Split("/"c)(0)+"_" + DerniereDate_Month_Fr_CapitalLetter.ToLower+"_"+Derniere_Date.Split("/"c)(2)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_44">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[NomFichier_MO_NouvelleDate]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">["MO journée_"+NouvelleDate_JJ_MM_YYYY.Split("/"c)(0) +"_"+ NouvelleDate_Month_FR_Majuscule.ToLower+"_"+NouvelleDate_JJ_MM_YYYY.Split("/"c)(2)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_45">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[AvantDerniereDate]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DT_Calendrier.AsEnumerable.LastOrDefault(function(r) Datetime.ParseExact(r(0).toString.replace(" 00:00:00",""),"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture) &lt; Datetime.ParseExact(Derniere_Date,"dd/MM/yyyy",System.Globalization.CultureInfo.InvariantCulture) and r(1).ToString.trim.Equals("Ouvrable"))(0).ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_46">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[AvantDerniereDate_Mois_Fr_Majscule]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(AvantDerniereDate.replace(" 00:00:00","").trim,"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("MMMM",new system.Globalization.CultureInfo("fr-FR")).Replace("é","e").ToUpper]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_47">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[AvantDerniereDate_Mois_Fr_CapitalLetter]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[AvantDerniereDate_Mois_Fr_Majscule.ToUpper.Substring(0,1) + AvantDerniereDate_Mois_Fr_Majscule.ToLower.Substring(1)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_48">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[AvantDerniereDate_Annee_YYYY]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[DateTime.ParseExact(NextDate.replace(" 00:00:00","").trim,"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("yyyy")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_49">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[Chemin_AvantDerniereDate_DonneesOption]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[in_Chemin_FichierMO.TrimEnd("\"c) +"\" +"MO " + AvantDerniereDate_Annee_YYYY +"\" + AvantDerniereDate_Mois_Fr_CapitalLetter + " " + AvantDerniereDate_Annee_YYYY + "\" + "[MO journée_"+DateTime.ParseExact(AvantDerniereDate.replace(" 00:00:00","").trim,"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture).tostring("dd")+"_" + AvantDerniereDate_Mois_Fr_CapitalLetter.ToLower+"_"+AvantDerniereDate_Annee_YYYY + ".xlsm]DONNEES OPTIONS"]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_50">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[Chemin_DerniereDate_DonneesOption]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[in_Chemin_FichierMO.TrimEnd("\"c) +"\" +"MO " + DerniereDate_Annee_YYYY +"\" + DerniereDate_Month_Fr_CapitalLetter + " " + DerniereDate_Annee_YYYY+ "\" + "[MO journée_"+Derniere_Date.Split("/"c)(0)+"_" + DerniereDate_Month_FR_Majuscule.ToLower+"_"+DerniereDate_Annee_YYYY+ ".xlsm]DONNEES OPTIONS"]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:MultipleAssign>
+    <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" sap:VirtualizedContainerService.HintSize="479,234" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="BKSOL_SDM_Report_PL_TauxMAD_Queue">
+      <ui:AddQueueItem.ItemInformation>
+        <InArgument x:TypeArguments="x:String" x:Key="NouvelleDate_JJMMYY">[NouvelleDate_JJMMYY]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="NouvelleDate_Month_FR_Majuscule">[NouvelleDate_Month_FR_Majuscule]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="NouvelleDate_Annee_YYYY">[NouvelleDate_Annee_YYYY]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="NouvelleDate_JJ_MM_YYYY_AvecEspace">[NouvelleDate_JJ_MM_YYYY_AvecEspace]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="NouvelleDate_JJ_MM_YY_AvecEspace">[NouvelleDate_JJ_MM_YY_AvecEspace]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="NouvelleDate_Month_FR_CapitalLetter">[NouvelleDate_Month_FR_CapitalLetter]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="NouvelleDate_JJ_MM_YYYY">[NouvelleDate_JJ_MM_YYYY]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="DerniereDate_Month_FR_Majuscule">[DerniereDate_Month_FR_Majuscule]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="DerniereDate_Annee_YYYY">[DerniereDate_Annee_YYYY]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="DerniereDate_JJ_MM_YYYY_AvecEspace">[DerniereDate_JJ_MM_YYYY_AvecEspace]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="DerniereDate_JJ_MM_YY_AvecEspace">[DerniereDate_JJ_MM_YY_AvecEspace]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="DerniereDate_Month_Fr_CapitalLetter">[DerniereDate_Month_Fr_CapitalLetter]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="DerniereDate_JJ_MM_YYYY">[DerniereDate_JJ_MM_YYYY]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="Lien_DernierFichier_HistoBilan">[Lien_DernierFichier_HistoBilan]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="Chemin_DossierPNL">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="NomFichier_MO_DerniereDate">[NomFichier_MO_DerniereDate]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="NomFichier_MO_NouvelleDate">[NomFichier_MO_NouvelleDate]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="Chemin_AvantDerniereDate_DonneesOption">[Chemin_AvantDerniereDate_DonneesOption]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="Chemin_DerniereDate_DonneesOption">[Chemin_DerniereDate_DonneesOption]</InArgument>
+      </ui:AddQueueItem.ItemInformation>
+    </ui:AddQueueItem>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="479,65" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="416,302" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:SetAsset TimeoutMS="{x:Null}" AssetName="BKSOL_SDM_Report_PL_TauxMAD_DerniereDate" DisplayName="Set Asset" sap:VirtualizedContainerService.HintSize="354,217" sap2010:WorkflowViewState.IdRef="SetAsset_1" Value="[NouvelleDate_JJ_MM_YYYY]" />
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="479,164" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;&quot;]" />
+  </Sequence>
+</Activity>

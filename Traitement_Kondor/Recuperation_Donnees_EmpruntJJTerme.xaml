@@ -1,0 +1,276 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Recuperation_Donnees_EmpruntJJ" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="io_stepWorkflow" Type="InOutArgument(x:String)" />
+    <x:Property Name="in_NouvelleDate_AvecEspace_JJ_MM_YY" Type="InArgument(x:String)" />
+    <x:Property Name="in_NewFolder_PNL" Type="InArgument(x:String)" />
+    <x:Property Name="out_EmpruntJJ_E10" Type="OutArgument(x:String)" />
+    <x:Property Name="out_EmpruntJJ_D10" Type="OutArgument(x:String)" />
+    <x:Property Name="out_EmpruntTerme_D11" Type="OutArgument(x:String)" />
+    <x:Property Name="out_EmpruntTerme_E11" Type="OutArgument(x:String)" />
+    <x:Property Name="out_Bam24H_E14" Type="OutArgument(x:String)" />
+    <x:Property Name="out_Bam24H_D14" Type="OutArgument(x:String)" />
+    <x:Property Name="out_Bam7J_E13" Type="OutArgument(x:String)" />
+    <x:Property Name="out_Bam7J_D13" Type="OutArgument(x:String)" />
+    <x:Property Name="out_Bam3M_D15" Type="OutArgument(x:String)" />
+    <x:Property Name="out_Bam3M_E15" Type="OutArgument(x:String)" />
+  </x:Members>
+  <this:Recuperation_Donnees_EmpruntJJ.in_NouvelleDate_AvecEspace_JJ_MM_YY>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Recuperation_Donnees_EmpruntJJ.in_NouvelleDate_AvecEspace_JJ_MM_YY>
+  <this:Recuperation_Donnees_EmpruntJJ.in_NewFolder_PNL>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Recuperation_Donnees_EmpruntJJ.in_NewFolder_PNL>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>733,2157</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Recuperation_Donnees_EmpruntJJ_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Recuperation_Donnees_EmpruntJJTerme" sap:VirtualizedContainerService.HintSize="541,2092" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="Recuperation_Donnees_EmpruntJJ" Name="Workflow_Name" />
+      <Variable x:TypeArguments="x:Object" Name="EmpruntJJ_E10" />
+      <Variable x:TypeArguments="x:Object" Name="EmpruntJJ_D10" />
+      <Variable x:TypeArguments="x:Object" Name="EmpruntTerme_E11" />
+      <Variable x:TypeArguments="x:Object" Name="EmpruntTerme_D11" />
+      <Variable x:TypeArguments="x:Object" Name="Bam24H_E14" />
+      <Variable x:TypeArguments="x:Object" Name="Bam24H_D14" />
+      <Variable x:TypeArguments="x:Object" Name="Bam3M_E15" />
+      <Variable x:TypeArguments="x:Object" Name="Bam3M_D15" />
+      <Variable x:TypeArguments="x:Object" Name="Bam7J_E13" />
+      <Variable x:TypeArguments="x:Object" Name="Bam7J_D13" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Logs\Log_Debut.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="479,153" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Logs\Log_Debut.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Workflow_name">[Workflow_Name]</InArgument>
+        <InOutArgument x:TypeArguments="x:String" x:Key="io_StepWorkflow">[io_stepWorkflow]</InOutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:ReadCell Cell="G6" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="479,128" sap2010:WorkflowViewState.IdRef="ReadCell_1" SheetName="IAM DISCOUNTED" WorkbookPath="[in_NewFolder_PNL.TrimEnd(&quot;/&quot;c) + &quot;/EMPRUNTJJTERME &quot; + in_NouvelleDate_AvecEspace_JJ_MM_YY + &quot;.xlsm&quot;]">
+      <ui:ReadCell.Result>
+        <OutArgument x:TypeArguments="x:Object">[EmpruntJJ_E10]</OutArgument>
+      </ui:ReadCell.Result>
+    </ui:ReadCell>
+    <ui:ReadCell Cell="F6" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="479,128" sap2010:WorkflowViewState.IdRef="ReadCell_2" SheetName="IAM DISCOUNTED" WorkbookPath="[in_NewFolder_PNL.TrimEnd(&quot;/&quot;c) + &quot;/EMPRUNTJJTERME &quot; + in_NouvelleDate_AvecEspace_JJ_MM_YY + &quot;.xlsm&quot;]">
+      <ui:ReadCell.Result>
+        <OutArgument x:TypeArguments="x:Object">[EmpruntJJ_D10]</OutArgument>
+      </ui:ReadCell.Result>
+    </ui:ReadCell>
+    <ui:ReadCell Cell="G7" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="479,128" sap2010:WorkflowViewState.IdRef="ReadCell_3" SheetName="IAM DISCOUNTED" WorkbookPath="[in_NewFolder_PNL.TrimEnd(&quot;/&quot;c) + &quot;/EMPRUNTJJTERME &quot; + in_NouvelleDate_AvecEspace_JJ_MM_YY + &quot;.xlsm&quot;]">
+      <ui:ReadCell.Result>
+        <OutArgument x:TypeArguments="x:Object">[EmpruntTerme_E11]</OutArgument>
+      </ui:ReadCell.Result>
+    </ui:ReadCell>
+    <ui:ReadCell Cell="F7" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="479,128" sap2010:WorkflowViewState.IdRef="ReadCell_5" SheetName="IAM DISCOUNTED" WorkbookPath="[in_NewFolder_PNL.TrimEnd(&quot;/&quot;c) + &quot;/EMPRUNTJJTERME &quot; + in_NouvelleDate_AvecEspace_JJ_MM_YY + &quot;.xlsm&quot;]">
+      <ui:ReadCell.Result>
+        <OutArgument x:TypeArguments="x:Object">[EmpruntTerme_D11]</OutArgument>
+      </ui:ReadCell.Result>
+    </ui:ReadCell>
+    <ui:ReadCell Cell="G15" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="479,128" sap2010:WorkflowViewState.IdRef="ReadCell_6" SheetName="IAM DISCOUNTED" WorkbookPath="[in_NewFolder_PNL.TrimEnd(&quot;/&quot;c) + &quot;/EMPRUNTJJTERME &quot; + in_NouvelleDate_AvecEspace_JJ_MM_YY + &quot;.xlsm&quot;]">
+      <ui:ReadCell.Result>
+        <OutArgument x:TypeArguments="x:Object">[Bam24H_E14]</OutArgument>
+      </ui:ReadCell.Result>
+    </ui:ReadCell>
+    <ui:ReadCell Cell="F15" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="479,128" sap2010:WorkflowViewState.IdRef="ReadCell_7" SheetName="IAM DISCOUNTED" WorkbookPath="[in_NewFolder_PNL.TrimEnd(&quot;/&quot;c) + &quot;/EMPRUNTJJTERME &quot; + in_NouvelleDate_AvecEspace_JJ_MM_YY + &quot;.xlsm&quot;]">
+      <ui:ReadCell.Result>
+        <OutArgument x:TypeArguments="x:Object">[Bam24H_D14]</OutArgument>
+      </ui:ReadCell.Result>
+    </ui:ReadCell>
+    <ui:ReadCell Cell="G17" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="479,128" sap2010:WorkflowViewState.IdRef="ReadCell_8" SheetName="IAM DISCOUNTED" WorkbookPath="[in_NewFolder_PNL.TrimEnd(&quot;/&quot;c) + &quot;/EMPRUNTJJTERME &quot; + in_NouvelleDate_AvecEspace_JJ_MM_YY + &quot;.xlsm&quot;]">
+      <ui:ReadCell.Result>
+        <OutArgument x:TypeArguments="x:Object">[Bam3M_E15]</OutArgument>
+      </ui:ReadCell.Result>
+    </ui:ReadCell>
+    <ui:ReadCell Cell="F17" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="479,128" sap2010:WorkflowViewState.IdRef="ReadCell_9" SheetName="IAM DISCOUNTED" WorkbookPath="[in_NewFolder_PNL.TrimEnd(&quot;/&quot;c) + &quot;/EMPRUNTJJTERME &quot; + in_NouvelleDate_AvecEspace_JJ_MM_YY + &quot;.xlsm&quot;]">
+      <ui:ReadCell.Result>
+        <OutArgument x:TypeArguments="x:Object">[Bam3M_D15]</OutArgument>
+      </ui:ReadCell.Result>
+    </ui:ReadCell>
+    <ui:ReadCell Cell="G18" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="479,128" sap2010:WorkflowViewState.IdRef="ReadCell_10" SheetName="IAM DISCOUNTED" WorkbookPath="[in_NewFolder_PNL.TrimEnd(&quot;/&quot;c) + &quot;/EMPRUNTJJTERME &quot; + in_NouvelleDate_AvecEspace_JJ_MM_YY + &quot;.xlsm&quot;]">
+      <ui:ReadCell.Result>
+        <OutArgument x:TypeArguments="x:Object">[Bam7J_E13]</OutArgument>
+      </ui:ReadCell.Result>
+    </ui:ReadCell>
+    <ui:ReadCell Cell="F18" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="479,128" sap2010:WorkflowViewState.IdRef="ReadCell_11" SheetName="IAM DISCOUNTED" WorkbookPath="[in_NewFolder_PNL.TrimEnd(&quot;/&quot;c) + &quot;/EMPRUNTJJTERME &quot; + in_NouvelleDate_AvecEspace_JJ_MM_YY + &quot;.xlsm&quot;]">
+      <ui:ReadCell.Result>
+        <OutArgument x:TypeArguments="x:Object">[Bam7J_D13]</OutArgument>
+      </ui:ReadCell.Result>
+    </ui:ReadCell>
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,435" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[out_EmpruntJJ_D10]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[EmpruntJJ_D10.ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[out_EmpruntJJ_E10]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[EmpruntJJ_E10.ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[out_EmpruntTerme_D11]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[EmpruntTerme_D11.ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[out_EmpruntTerme_E11]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[EmpruntTerme_E11.ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[out_Bam24H_D14]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[Bam24H_D14.ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[out_Bam24H_E14]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[Bam24H_E14.tostring]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[out_Bam7J_D13]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[Bam7J_D13.tostring]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[out_Bam7J_E13]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[Bam7J_E13.tostring]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[out_Bam3M_D15]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[Bam3M_D15.tostring]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[out_Bam3M_E15]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[Bam3M_E15.tostring]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+    </ui:MultipleAssign>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Logs\Log_Fin.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="479,136" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Logs\Log_Fin.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Workflow_name">[Workflow_Name]</InArgument>
+        <InOutArgument x:TypeArguments="x:String" x:Key="io_StepWorkflow">[io_stepWorkflow]</InOutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+  </Sequence>
+</Activity>
